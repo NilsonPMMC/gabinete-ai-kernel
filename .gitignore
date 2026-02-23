@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Variáveis de Ambiente (CRÍTICO: Nunca suba senhas/keys)
+.env
+
+# Docker
+docker-compose.override.yml
+
+# Modelos de IA (São pesados demais para o Git)
+models/
+*.bin
+*.gguf
+ollama_data/

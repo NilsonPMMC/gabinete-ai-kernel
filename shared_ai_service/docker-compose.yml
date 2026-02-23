@@ -1,0 +1,29 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - ./ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - ai_net
+
+  # App (Shared AI Service). Em Linux, se estiver buildando em arquitetura
+  # diferente (ex.: ARM), pode ser necessário adicionar: platform: linux/amd64
+  app:
+    build: .
+    container_name: shared-ai-app
+    depends_on:
+      - ollama
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      OLLAMA_MODEL: llama3.2:3b
+    ports:
+      - "8000:8000"
+    networks:
+      - ai_net
+
+networks:
+  ai_net:
+    driver: bridge
