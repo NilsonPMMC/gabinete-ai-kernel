@@ -2,7 +2,7 @@ import requests
 import time
 
 # Atenção: Seus logs mostraram porta 8000, então vamos testar nela.
-BASE_URL = "http://localhost:8001"
+BASE_URL = "http://localhost:8000"
 
 def testar_embeddings():
     print("\n--- Teste 1: Gerar Embeddings (Vetorização) ---")
