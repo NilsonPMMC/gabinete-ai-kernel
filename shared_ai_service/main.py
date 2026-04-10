@@ -37,7 +37,7 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    model_embedding: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    model_embedding: str = "mixedbread-ai/mxbai-embed-large-v1"
     ollama_host: str | None = None  # None => usa padrão do ollama (localhost)
     ollama_model: str = "llama3.2:3b"
 

@@ -1,6 +1,11 @@
 # Shared AI Service
 
-Serviço FastAPI para servir modelos de Deep Learning, especificamente o modelo de embeddings `paraphrase-multilingual-MiniLM-L12-v2`.
+Serviço FastAPI para embeddings, similaridade semântica e chat com LLM local.
+
+## Modelo de embeddings atual
+
+- `mixedbread-ai/mxbai-embed-large-v1`
+- dimensão do vetor: `1024`
 
 ## Instalação
 
@@ -14,35 +19,66 @@ pip install -r requirements.txt
 
 ```bash
 docker build -t shared-ai-service .
-docker run -p 8000:8000 shared-ai-service
+docker run -p 8001:8000 shared-ai-service
+```
+
+### Docker Compose
+
+```bash
+docker compose up --build
 ```
 
 ## Uso
 
-### Iniciar o servidor
+### Iniciar o servidor (local)
 
 ```bash
 python main.py
 # ou
-uvicorn main:app --host 0.0.0.0 --port 8000
+uvicorn main:app --host 0.0.0.0 --port 8001
 ```
 
-### Endpoint de Embeddings
-
-```bash
-curl -X POST "http://localhost:8000/v1/embeddings" \
-  -H "Content-Type: application/json" \
-  -d '{"texts": ["Olá mundo", "Hello world"]}'
-```
+## Endpoints
 
 ### Health Check
 
 ```bash
-curl http://localhost:8000/health
+curl http://localhost:8001/
+```
+
+### Embeddings
+
+```bash
+curl -X POST "http://localhost:8001/v1/embeddings" \
+  -H "Content-Type: application/json" \
+  -d '{"texts": ["Olá mundo", "Hello world"]}'
+```
+
+### Similaridade
+
+```bash
+curl -X POST "http://localhost:8001/v1/similarity" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "target_text": "João da Silva",
+    "candidates": ["Joao Silva", "Maria Oliveira", "Prefeitura Municipal"]
+  }'
+```
+
+### Chat (Ollama)
+
+```bash
+curl -X POST "http://localhost:8001/v1/chat" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "system_prompt": "Você é um assistente objetivo.",
+    "user_prompt": "Resuma o objetivo do serviço."
+  }'
 ```
 
 ## Estrutura
 
-- `main.py`: Aplicação FastAPI principal
-- `requirements.txt`: Dependências do projeto
-- `Dockerfile`: Configuração Docker otimizada para CPU
+- `main.py`: API FastAPI com endpoints de embeddings, similaridade e chat
+- `requirements.txt`: dependências Python
+- `Dockerfile`: build da aplicação e pré-download do modelo
+- `docker-compose.yml`: orquestração da API com Ollama

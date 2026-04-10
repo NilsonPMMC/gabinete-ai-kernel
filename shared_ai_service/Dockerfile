@@ -23,7 +23,7 @@ COPY main.py .
 
 # Pré-baixa o modelo durante o build para cachear na imagem
 # Isso garante que o modelo não precise ser baixado a cada deploy
-RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')"
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('mixedbread-ai/mxbai-embed-large-v1')"
 
 # Expõe a porta do FastAPI
 EXPOSE 8000

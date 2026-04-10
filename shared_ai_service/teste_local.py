@@ -27,7 +27,7 @@ def testar_embeddings():
             print(f"✅ Sucesso! Resposta em {tempo:.2f}s")
             if isinstance(embeddings, list) and len(embeddings) > 0:
                 print(f"   Qtd textos processados: {len(embeddings)}")
-                print(f"   Tamanho do vetor (dimensões): {len(embeddings[0])} (Esperado: 384)")
+                print(f"   Tamanho do vetor (dimensões): {len(embeddings[0])} (Esperado: 1024)")
             else:
                 print("   ⚠️ Formato de resposta inesperado:", dados)
         else:

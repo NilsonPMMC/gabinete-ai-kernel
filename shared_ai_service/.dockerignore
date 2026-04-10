@@ -13,3 +13,4 @@ build/
 .gitignore
 README.md
 .env
+ollama_data/
