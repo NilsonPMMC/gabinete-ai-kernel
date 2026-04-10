@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ```bash
 docker build -t shared-ai-service .
-docker run -p 8001:8000 shared-ai-service
+docker run -p 8004:8000 shared-ai-service
 ```
 
 ### Docker Compose
@@ -35,7 +35,7 @@ docker compose up --build
 ```bash
 python main.py
 # ou
-uvicorn main:app --host 0.0.0.0 --port 8001
+uvicorn main:app --host 0.0.0.0 --port 8004
 ```
 
 ## Endpoints
@@ -43,13 +43,13 @@ uvicorn main:app --host 0.0.0.0 --port 8001
 ### Health Check
 
 ```bash
-curl http://localhost:8001/
+curl http://localhost:8004/
 ```
 
 ### Embeddings
 
 ```bash
-curl -X POST "http://localhost:8001/v1/embeddings" \
+curl -X POST "http://localhost:8004/v1/embeddings" \
   -H "Content-Type: application/json" \
   -d '{"texts": ["Olá mundo", "Hello world"]}'
 ```
@@ -57,7 +57,7 @@ curl -X POST "http://localhost:8001/v1/embeddings" \
 ### Similaridade
 
 ```bash
-curl -X POST "http://localhost:8001/v1/similarity" \
+curl -X POST "http://localhost:8004/v1/similarity" \
   -H "Content-Type: application/json" \
   -d '{
     "target_text": "João da Silva",
@@ -68,7 +68,7 @@ curl -X POST "http://localhost:8001/v1/similarity" \
 ### Chat (Ollama)
 
 ```bash
-curl -X POST "http://localhost:8001/v1/chat" \
+curl -X POST "http://localhost:8004/v1/chat" \
   -H "Content-Type: application/json" \
   -d '{
     "system_prompt": "Você é um assistente objetivo.",
